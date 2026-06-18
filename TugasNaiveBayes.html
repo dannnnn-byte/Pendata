@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Analisis Data Menggunakan Naive Bayes (KNIME + Python) &#8212; Penambangan Data</title>
+    <title>Random Forest &#8212; Penambangan Data</title>
   
   
   
@@ -62,13 +62,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'TugasNaiveBayes';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Tugas_Random_Forest';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Tugas Decision Tree C4.5 (Gain Ratio)" href="Tugas_Decision_Tree.html" />
-    <link rel="prev" title="UTS Analisa Data Kesuburan Tanah" href="UTS_Pendat.html" />
+    <link rel="next" title="Tugas Analisa Data Menggunakan Regresi Linier" href="Tugas_Regresi_Linier.html" />
+    <link rel="prev" title="Tugas Decision Tree C4.5 (Gain Ratio)" href="Tugas_Decision_Tree.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -189,16 +187,18 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="UTS_Pendat.html">UTS Analisa Data Kesuburan Tanah</a></li>
 
 
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas Naive Bayes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TugasNaiveBayes.html">Tugas Naive Bayes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Tugas_Decision_Tree.html">Tugas Decision Tree</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Tugas_Random_Forest.html">Tugas Random Forest</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Tugas Random Forest</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Tugas_Regresi_Linier.html">Tugas Analisa Data Menggunakan Regresi Linier</a></li>
-
-
-
-
 <li class="toctree-l1"><a class="reference internal" href="Peramalan_NO2_Blega_Galis_Konang.html">Peramalan NO2 Blega, Galis, Konang</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Skforecast.html">Tugas Skforecast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UAS.html">UAS</a></li>
+
+
+
+
+
 </ul>
 
     </div>
@@ -253,7 +253,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="_sources/TugasNaiveBayes.ipynb" target="_blank"
+      <li><a href="_sources/Tugas_Random_Forest.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -263,7 +263,7 @@ const thebe_selector_output = ".output, .cell_output"
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.ipynb</span>
+<span class="btn__text-container">.md</span>
 </a>
 </li>
       
@@ -337,7 +337,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Analisis Data Menggunakan Naive Bayes (KNIME + Python)</h1>
+    <h1>Random Forest</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -347,40 +347,23 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">1. Pendahuluan</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-naive-bayes">2. Konsep Naive Bayes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asumsi-naive-bayes">3. Asumsi Naive Bayes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-naive-bayes">4. Gaussian Naive Bayes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-data">5. Preprocessing Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-value">5.1 Missing Value</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi">5.2 Normalisasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents">Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-pada-knime">Implementasi Pada KNIME</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-reader">CSV Reader</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#column-filter">Column Filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partisi">Partisi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-python-script-random-forest">Training: Python Script Random Forest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-python-script-prediksi">Testing: Python Script Prediksi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer">Scorer</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#akurasi">Akurasi</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime">6. Workflow KNIME</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-node">7. Penjelasan Node</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-csv-reader">a. CSV Reader</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-missing-value">b. Missing Value</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-color-manager">c. Color Manager</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-number-to-string">d. Number to String</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-normalizer">e. Normalizer</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-python-script">f. Python Script</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-kode">Penjelasan Kode</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g-scorer">g. Scorer</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-model">8. Hasil Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">9. Confusion Matrix</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-evaluasi">10. Perhitungan Evaluasi</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">10.1 Accuracy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision">10.2 Precision</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recall">10.3 Recall</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-evaluasi">10.4 Kesimpulan Evaluasi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis">11. Analisis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">12. Kesimpulan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
 </ul>
             </nav>
         </div>
@@ -392,397 +375,539 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="analisis-data-menggunakan-naive-bayes-knime-python">
-<h1>Analisis Data Menggunakan Naive Bayes (KNIME + Python)<a class="headerlink" href="#analisis-data-menggunakan-naive-bayes-knime-python" title="Permalink to this heading">#</a></h1>
-<section id="pendahuluan">
-<h2>1. Pendahuluan<a class="headerlink" href="#pendahuluan" title="Permalink to this heading">#</a></h2>
-<p>Metode Naive Bayes merupakan salah satu algoritma klasifikasi yang banyak digunakan dalam data mining dan machine learning. Algoritma ini bekerja berdasarkan konsep probabilitas dan teorema Bayes dengan asumsi bahwa setiap fitur bersifat independen satu sama lain. Meskipun asumsi tersebut cukup sederhana, Naive Bayes sering menghasilkan performa yang baik dalam berbagai kasus klasifikasi.</p>
-</section>
-<section id="konsep-naive-bayes">
-<h2>2. Konsep Naive Bayes<a class="headerlink" href="#konsep-naive-bayes" title="Permalink to this heading">#</a></h2>
-<p>Metode yang digunakan pada analisis ini adalah Naive Bayes. Secara sederhana, metode ini bekerja dengan menghitung peluang suatu data masuk ke dalam kelas tertentu berdasarkan fitur yang dimilikinya. Setelah semua peluang dihitung, model akan memilih kelas dengan nilai probabilitas terbesar sebagai hasil prediksi.</p>
-<p>Dasar dari metode ini adalah Teorema Bayes, yang dirumuskan sebagai berikut:</p>
-<p><span class="math notranslate nohighlight">\(P(C|X) = \frac{P(X|C) \cdot P(C)}{P(X)}\)</span></p>
-<p>Namun dalam praktiknya, karena nilai <span class="math notranslate nohighlight">\((P(X))\)</span> sama untuk semua kelas, perbandingan cukup dilakukan pada:</p>
-<p><span class="math notranslate nohighlight">\(P(C|X) = P(C) \cdot P(X|C)\)</span></p>
-<p>Jika fitur lebih dari satu, maka dihitung:</p>
-<p><span class="math notranslate nohighlight">\(P(C|X) = P(C) \cdot P(x_1|C) \cdot P(x_2|C) \cdot ... \cdot P(x_n|C)\)</span></p>
-</section>
-<section id="asumsi-naive-bayes">
-<h2>3. Asumsi Naive Bayes<a class="headerlink" href="#asumsi-naive-bayes" title="Permalink to this heading">#</a></h2>
-<p>Naive Bayes memiliki asumsi bahwa setiap fitur tidak saling bergantung. Artinya, setiap variabel dianggap memiliki pengaruh sendiri terhadap hasil, tanpa dipengaruhi oleh variabel lain.</p>
-<p>Sebagai contoh, model menganggap bahwa umur tidak berhubungan dengan total pengeluaran, atau lama berlangganan tidak berhubungan dengan frekuensi penggunaan. Walaupun dalam kenyataannya bisa saja ada hubungan, asumsi ini tetap digunakan agar proses perhitungan menjadi lebih sederhana.</p>
-</section>
-<section id="gaussian-naive-bayes">
-<h2>4. Gaussian Naive Bayes<a class="headerlink" href="#gaussian-naive-bayes" title="Permalink to this heading">#</a></h2>
-<p>Karena sebagian besar data berbentuk numerik, maka digunakan Gaussian Naive Bayes. Metode ini mengasumsikan bahwa data mengikuti distribusi normal.</p>
-<p>Rumus distribusi Gaussian:</p>
-<p><span class="math notranslate nohighlight">\(P(x_i|C) = \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x_i-\mu)^2}{2\sigma^2}}\)</span></p>
-<p>Dengan pendekatan ini, model menghitung seberapa dekat nilai suatu fitur terhadap rata-rata kelas tertentu.</p>
-</section>
-<section id="preprocessing-data">
-<h2>5. Preprocessing Data<a class="headerlink" href="#preprocessing-data" title="Permalink to this heading">#</a></h2>
-<p>Sebelum data digunakan dalam model, dilakukan beberapa tahap preprocessing.</p>
-<section id="missing-value">
-<h3>5.1 Missing Value<a class="headerlink" href="#missing-value" title="Permalink to this heading">#</a></h3>
-<p>Data yang kosong perlu ditangani karena tidak bisa langsung diproses oleh model. Pada tahap ini:</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="random-forest">
+<h1>Random Forest<a class="headerlink" href="#random-forest" title="Permalink to this heading">#</a></h1>
+<section id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>Data numerik diisi menggunakan nilai rata-rata (mean)</p></li>
-<li><p>Data kategori diisi dengan nilai yang paling sering muncul</p></li>
-<li><p>Kolom target (Churn) tidak diubah sembarangan</p></li>
+<li><p><span class="xref myst">Dataset</span></p></li>
+<li><p><span class="xref myst">Implementasi Pada KNIME</span></p>
+<ul>
+<li><p><span class="xref myst">Workflow</span></p></li>
+<li><p><span class="xref myst">Partisi</span></p></li>
+<li><p><span class="xref myst">Column Filter</span></p></li>
+<li><p><span class="xref myst">Training: Python Script Random Forest</span></p></li>
+<li><p><span class="xref myst">Testing: Python Script Prediksi</span></p></li>
+<li><p><span class="xref myst">Scorer</span></p></li>
 </ul>
-<p>Rumus mean:</p>
-<p><span class="math notranslate nohighlight">\(
-Mean = \frac{\sum x}{n}
-\)</span></p>
-<p>Dengan cara ini, data tetap bisa digunakan tanpa harus banyak menghapus baris.</p>
-<p><img alt="" src="https://cdn.mathpix.com/snip/images/91p-rm5yQDZfQKuyZrQ5KFH6koir3BI0NUBaHbeyIpQ.original.fullsize.png" /></p>
+</li>
+<li><p><span class="xref myst">Kesimpulan</span></p></li>
+</ul>
 </section>
-<section id="normalisasi">
-<h3>5.2 Normalisasi<a class="headerlink" href="#normalisasi" title="Permalink to this heading">#</a></h3>
-<p>Normalisasi dilakukan untuk menyamakan skala antar fitur. Hal ini penting karena setiap fitur memiliki rentang nilai yang berbeda.</p>
-<p>Rumus Min-Max Normalization:</p>
-<p><span class="math notranslate nohighlight">\(
-X' = \frac{X - X_{min}}{X_{max} - X_{min}}
-\)</span></p>
-<p>Dengan normalisasi, semua fitur berada pada skala yang lebih seimbang sehingga model dapat bekerja lebih optimal.</p>
-<p><img alt="" src="https://cdn.mathpix.com/snip/images/j-jmFih9hMUdm0opgSsyRHyQz8YjoTDBl-oG8-evUB8.original.fullsize.png" /></p>
-</section>
-</section>
-<section id="workflow-knime">
-<h2>6. Workflow KNIME<a class="headerlink" href="#workflow-knime" title="Permalink to this heading">#</a></h2>
-<p>Alur proses yang digunakan adalah:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>CSV Reader =&gt; Missing Value =&gt; Color Manager =&gt; Number to String =&gt; Normalizer =&gt; Python Script =&gt; Scorer
-</pre></div>
-</div>
-<p><img alt="" src="https://cdn.mathpix.com/snip/images/bXQhfYsEvma0Xa0Xp9GSbxso82AES3wRnSlhp05gZeA.original.fullsize.png" /></p>
-</section>
-<section id="penjelasan-node">
-<h2>7. Penjelasan Node<a class="headerlink" href="#penjelasan-node" title="Permalink to this heading">#</a></h2>
-<section id="a-csv-reader">
-<h3>a. CSV Reader<a class="headerlink" href="#a-csv-reader" title="Permalink to this heading">#</a></h3>
-<p>Digunakan untuk membaca dataset dari file CSV. Pada tahap ini data dimasukkan ke dalam KNIME.</p>
-<p><img alt="" src="https://cdn.mathpix.com/snip/images/9Ep0k8XP2H1wixbTHKItHfhpBFAQ9fPNsh-O66UaGcU.original.fullsize.png" /></p>
-</section>
-<section id="b-missing-value">
-<h3>b. Missing Value<a class="headerlink" href="#b-missing-value" title="Permalink to this heading">#</a></h3>
-<p>Digunakan untuk menangani data kosong. Nilai kosong diisi agar tidak mengganggu proses modeling.</p>
-<p><img alt="" src="https://cdn.mathpix.com/snip/images/91p-rm5yQDZfQKuyZrQ5KFH6koir3BI0NUBaHbeyIpQ.original.fullsize.png" /></p>
-</section>
-<section id="c-color-manager">
-<h3>c. Color Manager<a class="headerlink" href="#c-color-manager" title="Permalink to this heading">#</a></h3>
-<p>Digunakan untuk memberi warna pada data berdasarkan kolom Churn. Fungsinya hanya untuk visualisasi.</p>
-<p><img alt="" src="https://cdn.mathpix.com/snip/images/mQUefdvf2mYLagaTFwar7iDTb7GsqHA1h3xJfm2-zMw.original.fullsize.png" /></p>
-</section>
-<section id="d-number-to-string">
-<h3>d. Number to String<a class="headerlink" href="#d-number-to-string" title="Permalink to this heading">#</a></h3>
-<p>Mengubah kolom Churn menjadi tipe string agar dikenali sebagai kategori.</p>
-<p><img alt="" src="https://cdn.mathpix.com/snip/images/P6NZQR6DY5yfmBc6LysR0FQXIjUDasp2mtKsw-j5jR4.original.fullsize.png" /></p>
-</section>
-<section id="e-normalizer">
-<h3>e. Normalizer<a class="headerlink" href="#e-normalizer" title="Permalink to this heading">#</a></h3>
-<p>Digunakan untuk menyamakan skala data numerik agar tidak ada fitur yang terlalu dominan.</p>
-<p><img alt="" src="https://cdn.mathpix.com/snip/images/j-jmFih9hMUdm0opgSsyRHyQz8YjoTDBl-oG8-evUB8.original.fullsize.png" /></p>
-</section>
-<section id="f-python-script">
-<h3>f. Python Script<a class="headerlink" href="#f-python-script" title="Permalink to this heading">#</a></h3>
-<p>Node <strong>Python Script</strong> digunakan untuk membuat model <strong>Gaussian Naive Bayes</strong> menggunakan library <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>. Pada node ini, data dari KNIME diambil lalu diproses menggunakan Python. Proses yang dilakukan meliputi pemilihan fitur, pemisahan target, pembagian data training dan testing, pembuatan model, prediksi, serta perhitungan probabilitas.</p>
-<p>Kode yang digunakan pada node Python Script adalah sebagai berikut:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">knime.scripting.io</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">knio</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">input_tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
-
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;Age&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Tenure&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Usage Frequency&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Support Calls&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Payment Delay&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Total Spend&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Last Interaction&quot;</span>
-<span class="p">]</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="n">features</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;Churn&quot;</span><span class="p">])</span>
-
-<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Churn&quot;</span><span class="p">]</span>
-
-<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
-    <span class="n">X</span><span class="p">,</span>
-    <span class="n">y</span><span class="p">,</span>
-    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
-    <span class="n">stratify</span><span class="o">=</span><span class="n">y</span>
-<span class="p">)</span>
-
-<span class="n">model</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="n">prediction</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-<span class="n">probability</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-
-<span class="n">output</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-    <span class="s2">&quot;Actual&quot;</span><span class="p">:</span> <span class="n">y_test</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
-    <span class="s2">&quot;Prediction&quot;</span><span class="p">:</span> <span class="n">prediction</span><span class="p">,</span>
-    <span class="s2">&quot;Prob_0&quot;</span><span class="p">:</span> <span class="n">probability</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
-    <span class="s2">&quot;Prob_1&quot;</span><span class="p">:</span> <span class="n">probability</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="p">})</span>
-
-<span class="n">knio</span><span class="o">.</span><span class="n">output_tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-</pre></div>
-</div>
-<section id="penjelasan-kode">
-<h4>Penjelasan Kode<a class="headerlink" href="#penjelasan-kode" title="Permalink to this heading">#</a></h4>
-<p>Bagian pertama digunakan untuk memanggil library yang dibutuhkan.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">knime.scripting.io</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">knio</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.model_selection</span><span class="w"> </span><span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.naive_bayes</span><span class="w"> </span><span class="kn">import</span> <span class="n">GaussianNB</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">knime.scripting.io</span></code> digunakan agar Python dapat mengambil data dari KNIME dan mengirim hasilnya kembali ke KNIME. Library <code class="docutils literal notranslate"><span class="pre">pandas</span></code> digunakan untuk mengolah data dalam bentuk tabel. <code class="docutils literal notranslate"><span class="pre">train_test_split</span></code> digunakan untuk membagi data menjadi data latih dan data uji. <code class="docutils literal notranslate"><span class="pre">GaussianNB</span></code> digunakan untuk membuat model Gaussian Naive Bayes.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">input_tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
-</pre></div>
-</div>
-<p>Kode ini mengambil data dari input Python Script di KNIME. Data tersebut kemudian diubah menjadi DataFrame pandas agar lebih mudah diproses di Python.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">features</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">&quot;Age&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Tenure&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Usage Frequency&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Support Calls&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Payment Delay&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Total Spend&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Last Interaction&quot;</span>
-<span class="p">]</span>
-</pre></div>
-</div>
-<p>Bagian ini menentukan fitur yang digunakan untuk memprediksi churn. Fitur yang dipakai adalah data numerik yang dianggap berpengaruh terhadap kemungkinan pelanggan churn.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="n">features</span> <span class="o">+</span> <span class="p">[</span><span class="s2">&quot;Churn&quot;</span><span class="p">])</span>
-</pre></div>
-</div>
-<p>Kode ini digunakan untuk menghapus baris yang masih memiliki nilai kosong pada fitur atau target. Walaupun missing value sudah ditangani di KNIME, baris ini tetap digunakan sebagai pengaman agar model tidak error.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Churn&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">X</span></code> berisi fitur yang digunakan sebagai input model, sedangkan <code class="docutils literal notranslate"><span class="pre">y</span></code> berisi target yang akan diprediksi, yaitu kolom <code class="docutils literal notranslate"><span class="pre">Churn</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span>
-    <span class="n">X</span><span class="p">,</span>
-    <span class="n">y</span><span class="p">,</span>
-    <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span>
-    <span class="n">stratify</span><span class="o">=</span><span class="n">y</span>
-<span class="p">)</span>
-</pre></div>
-</div>
-<p>Kode ini membagi data menjadi data training dan testing. Data training digunakan untuk melatih model, sedangkan data testing digunakan untuk menguji hasil prediksi. Nilai <code class="docutils literal notranslate"><span class="pre">test_size=0.3</span></code> berarti 30% data digunakan sebagai data testing dan 70% sebagai data training. <code class="docutils literal notranslate"><span class="pre">random_state=42</span></code> digunakan agar hasil pembagian data tetap sama setiap kali dijalankan. <code class="docutils literal notranslate"><span class="pre">stratify=y</span></code> digunakan agar proporsi kelas <code class="docutils literal notranslate"><span class="pre">0</span></code> dan <code class="docutils literal notranslate"><span class="pre">1</span></code> tetap seimbang pada data training dan testing.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">GaussianNB</span><span class="p">()</span>
-<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Bagian ini membuat model Gaussian Naive Bayes dan melatihnya menggunakan data training. Pada proses ini model mempelajari pola dari fitur pelanggan terhadap target <code class="docutils literal notranslate"><span class="pre">Churn</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">prediction</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Kode ini digunakan untuk memprediksi data testing. Hasilnya berupa kelas akhir, yaitu <code class="docutils literal notranslate"><span class="pre">0</span></code> atau <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">probability</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Kode ini digunakan untuk menghasilkan probabilitas setiap kelas. Output probabilitas ini menunjukkan seberapa besar peluang data masuk ke kelas <code class="docutils literal notranslate"><span class="pre">0</span></code> atau kelas <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
-<p>Contoh:</p>
+<hr class="docutils" />
+<section id="dataset">
+<h2>Dataset<a class="headerlink" href="#dataset" title="Permalink to this heading">#</a></h2>
+<p>Dataset yang digunakan adalah <strong>Dataset Prediksi Kelulusan Mahasiswa</strong>. Dataset ini dibuat untuk melakukan klasifikasi status kelulusan mahasiswa berdasarkan beberapa atribut akademik dan non-akademik.</p>
+<p>Tujuan dari dataset ini adalah memprediksi apakah mahasiswa termasuk dalam kategori:</p>
+<ul class="simple">
+<li><p><strong>Tepat Waktu</strong></p></li>
+<li><p><strong>Tidak Tepat Waktu</strong></p></li>
+</ul>
+<p>Dataset ini memiliki:</p>
+<ul class="simple">
+<li><p><strong>500 baris data</strong></p></li>
+<li><p><strong>7 fitur utama</strong></p></li>
+<li><p><strong>1 label/target</strong> bernama <code class="docutils literal notranslate"><span class="pre">Status_Kelulusan</span></code></p></li>
+</ul>
+<p>Berikut fitur yang digunakan pada dataset:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head text-right"><p>Prob_0</p></th>
-<th class="head text-right"><p>Prob_1</p></th>
-<th class="head"><p>Prediction</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td class="text-right"><p>0.138</p></td>
-<td class="text-right"><p>0.862</p></td>
-<td><p>1</p></td>
-</tr>
-<tr class="row-odd"><td class="text-right"><p>0.905</p></td>
-<td class="text-right"><p>0.095</p></td>
-<td><p>0</p></td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Jika <code class="docutils literal notranslate"><span class="pre">Prob_1</span></code> lebih besar daripada <code class="docutils literal notranslate"><span class="pre">Prob_0</span></code>, maka model memprediksi kelas <code class="docutils literal notranslate"><span class="pre">1</span></code>. Sebaliknya, jika <code class="docutils literal notranslate"><span class="pre">Prob_0</span></code> lebih besar, maka model memprediksi kelas <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-    <span class="s2">&quot;Actual&quot;</span><span class="p">:</span> <span class="n">y_test</span><span class="o">.</span><span class="n">values</span><span class="p">,</span>
-    <span class="s2">&quot;Prediction&quot;</span><span class="p">:</span> <span class="n">prediction</span><span class="p">,</span>
-    <span class="s2">&quot;Prob_0&quot;</span><span class="p">:</span> <span class="n">probability</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
-    <span class="s2">&quot;Prob_1&quot;</span><span class="p">:</span> <span class="n">probability</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
-<span class="p">})</span>
-</pre></div>
-</div>
-<p>Bagian ini membuat tabel hasil yang akan dikirim kembali ke KNIME. Kolom <code class="docutils literal notranslate"><span class="pre">Actual</span></code> berisi nilai asli dari dataset, kolom <code class="docutils literal notranslate"><span class="pre">Prediction</span></code> berisi hasil prediksi model, kolom <code class="docutils literal notranslate"><span class="pre">Prob_0</span></code> berisi probabilitas kelas 0, dan kolom <code class="docutils literal notranslate"><span class="pre">Prob_1</span></code> berisi probabilitas kelas 1.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">knio</span><span class="o">.</span><span class="n">output_tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>Kode terakhir ini digunakan untuk mengirim hasil dari Python kembali ke KNIME agar bisa diteruskan ke node <strong>Scorer</strong>.</p>
-<p><strong>Hasil / Output :</strong></p>
-<p><img alt="" src="https://cdn.mathpix.com/snip/images/K2y7WTgUzOswgegyow_6RvpHWIUpnHwSKGW4-Lt3kJg.original.fullsize.png" /></p>
-</section>
-</section>
-<section id="g-scorer">
-<h3>g. Scorer<a class="headerlink" href="#g-scorer" title="Permalink to this heading">#</a></h3>
-<p>Digunakan untuk mengevaluasi hasil prediksi.</p>
-<p>Setting:</p>
-<ul class="simple">
-<li><p>First column = Actual</p></li>
-<li><p>Second column = Prediction</p></li>
-</ul>
-<p><img alt="" src="https://cdn.mathpix.com/snip/images/QC1nY1_xPoD1DO92slYUnULXD49_o6M62AJqaxc8vG8.original.fullsize.png" /></p>
-<p><img alt="" src="https://cdn.mathpix.com/snip/images/8w_d_xEazi-NJqFLNtejUEjJaNbsHV0C4O8grTuYagI.original.fullsize.png" /></p>
-</section>
-</section>
-<section id="hasil-model">
-<h2>8. Hasil Model<a class="headerlink" href="#hasil-model" title="Permalink to this heading">#</a></h2>
-<p>Contoh hasil:</p>
-<div class="pst-scrollable-table-container"><table class="table">
-<thead>
-<tr class="row-odd"><th class="head"><p>Actual</p></th>
-<th class="head"><p>Prediction</p></th>
-<th class="head"><p>Prob_0</p></th>
-<th class="head"><p>Prob_1</p></th>
+<tr class="row-odd"><th class="head"><p>No</p></th>
+<th class="head"><p>Nama Fitur</p></th>
+<th class="head"><p>Tipe Data</p></th>
+<th class="head"><p>Deskripsi</p></th>
+<th class="head"><p>Contoh Nilai</p></th>
 </tr>
 </thead>
 <tbody>
 <tr class="row-even"><td><p>1</p></td>
-<td><p>1</p></td>
-<td><p>0.138</p></td>
-<td><p>0.862</p></td>
+<td><p>ID_Mahasiswa</p></td>
+<td><p>String</p></td>
+<td><p>Kode unik mahasiswa</p></td>
+<td><p>MHS001</p></td>
 </tr>
-<tr class="row-odd"><td><p>0</p></td>
-<td><p>0</p></td>
-<td><p>0.905</p></td>
-<td><p>0.095</p></td>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>IPK</p></td>
+<td><p>Numerik</p></td>
+<td><p>Indeks Prestasi Kumulatif mahasiswa</p></td>
+<td><p>3.45</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Kehadiran</p></td>
+<td><p>Numerik</p></td>
+<td><p>Persentase kehadiran mahasiswa</p></td>
+<td><p>85</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Nilai_Tugas</p></td>
+<td><p>Numerik</p></td>
+<td><p>Nilai tugas mahasiswa</p></td>
+<td><p>88</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Nilai_UTS</p></td>
+<td><p>Numerik</p></td>
+<td><p>Nilai Ujian Tengah Semester</p></td>
+<td><p>80</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Nilai_UAS</p></td>
+<td><p>Numerik</p></td>
+<td><p>Nilai Ujian Akhir Semester</p></td>
+<td><p>84</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>Organisasi</p></td>
+<td><p>Kategorikal</p></td>
+<td><p>Status keaktifan organisasi</p></td>
+<td><p>Aktif / Tidak Aktif</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>Status_Kelulusan</p></td>
+<td><p>Kategorikal</p></td>
+<td><p>Label target prediksi</p></td>
+<td><p>Tepat Waktu / Tidak Tepat Waktu</p></td>
 </tr>
 </tbody>
 </table>
 </div>
-<p>Model memilih kelas berdasarkan probabilitas terbesar.</p>
-</section>
-<section id="confusion-matrix">
-<h2>9. Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this heading">#</a></h2>
+<p>Label yang digunakan:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
-<tr class="row-odd"><th class="head"><p>Actual / Prediction</p></th>
-<th class="head"><p>0</p></th>
-<th class="head"><p>1</p></th>
+<tr class="row-odd"><th class="head"><p>Label</p></th>
+<th class="head"><p>Keterangan</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>0</p></td>
-<td><p>8108</p></td>
-<td><p>2057</p></td>
+<tr class="row-even"><td><p>Tepat Waktu</p></td>
+<td><p>Mahasiswa diprediksi lulus tepat waktu</p></td>
 </tr>
-<tr class="row-odd"><td><p>1</p></td>
-<td><p>1342</p></td>
-<td><p>7806</p></td>
+<tr class="row-odd"><td><p>Tidak Tepat Waktu</p></td>
+<td><p>Mahasiswa diprediksi tidak lulus tepat waktu</p></td>
 </tr>
 </tbody>
 </table>
 </div>
 </section>
-<section id="perhitungan-evaluasi">
-<h2>10. Perhitungan Evaluasi<a class="headerlink" href="#perhitungan-evaluasi" title="Permalink to this heading">#</a></h2>
-<p>Setelah model selesai melakukan prediksi, langkah berikutnya adalah mengevaluasi seberapa baik performa model tersebut. Evaluasi ini penting karena kita ingin mengetahui apakah model benar-benar bisa memprediksi churn dengan baik, bukan sekadar menghasilkan angka saja.</p>
-<p>Untuk itu digunakan beberapa metrik evaluasi, yaitu <strong>Accuracy, Precision, dan Recall</strong>. Masing-masing memiliki fungsi yang berbeda dan tidak bisa hanya melihat satu saja.</p>
 <hr class="docutils" />
-<section id="accuracy">
-<h3>10.1 Accuracy<a class="headerlink" href="#accuracy" title="Permalink to this heading">#</a></h3>
-<p><span class="math notranslate nohighlight">\(
-Accuracy = \frac{TP + TN}{Total}
-\)</span></p>
-<p><span class="math notranslate nohighlight">\(
-= \frac{7806 + 8108}{19313}
-= 0.824
-\)</span></p>
-<p>≈ 82.4%</p>
-<p><strong>Penjelasan:</strong></p>
-<p>Accuracy digunakan untuk mengukur seberapa banyak prediksi yang benar dibandingkan dengan seluruh data yang diuji. Dengan kata lain, accuracy menunjukkan tingkat ketepatan model secara keseluruhan.</p>
-<p>Pada hasil di atas, nilai accuracy sebesar 82.4% berarti dari seluruh data testing, sekitar 82% berhasil diprediksi dengan benar oleh model.</p>
-<p><strong>Kegunaan:</strong></p>
+<section id="implementasi-pada-knime">
+<h2>Implementasi Pada KNIME<a class="headerlink" href="#implementasi-pada-knime" title="Permalink to this heading">#</a></h2>
+<p>Workflow ini dirancang menggunakan KNIME untuk membangun model klasifikasi <strong>Random Forest</strong> berbasis Python menggunakan library <code class="docutils literal notranslate"><span class="pre">scikit-learn</span></code>.</p>
+<p>Model dibuat menggunakan node <strong>Python Script</strong>, sehingga proses training dan testing dilakukan melalui script Python di dalam KNIME.</p>
+<p>Tujuan dari workflow ini adalah memprediksi <code class="docutils literal notranslate"><span class="pre">Status_Kelulusan</span></code> mahasiswa berdasarkan IPK, kehadiran, nilai tugas, nilai UTS, nilai UAS, dan status organisasi.</p>
+<hr class="docutils" />
+<section id="workflow">
+<h3>Workflow<a class="headerlink" href="#workflow" title="Permalink to this heading">#</a></h3>
+<figure class="align-center" id="workflow-rf-kelulusan">
+<img alt="../img/random-forest-kelulusan/workflowrandomforest.png" src="_static/workflow random forest.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Workflow KNIME untuk klasifikasi Random Forest prediksi kelulusan mahasiswa</span><a class="headerlink" href="#workflow-rf-kelulusan" title="Permalink to this image">#</a></p>
+<div class="legend">
+<p>Workflow terdiri dari node-node berikut:</p>
+<ol class="arabic simple">
+<li><p><strong>CSV Reader</strong> digunakan untuk membaca dataset.</p></li>
+<li><p><strong>Column Filter</strong> digunakan untuk membuang kolom yang tidak diperlukan.</p></li>
+<li><p><strong>Table Partitioner</strong> digunakan untuk membagi data training dan testing.</p></li>
+<li><p><strong>Python Script</strong> pertama digunakan untuk melatih model Random Forest.</p></li>
+<li><p><strong>Python Script</strong> kedua digunakan untuk melakukan prediksi.</p></li>
+<li><p><strong>Scorer</strong> digunakan untuk mengevaluasi hasil prediksi.</p></li>
+</ol>
+<p>Alur workflow:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>CSV Reader
+    ↓
+Column Filter
+    ↓
+Table Partitioner
+   ├── Python Script Training
+   └── Python Script Testing / Prediction
+                ↓
+              Scorer
+</pre></div>
+</div>
+</div>
+</figcaption>
+</figure>
+</section>
+<hr class="docutils" />
+<section id="csv-reader">
+<h3>CSV Reader<a class="headerlink" href="#csv-reader" title="Permalink to this heading">#</a></h3>
+<figure class="align-center" id="csv-reader-rf-kelulusan">
+<img alt="../img/random-forest-kelulusan/csvreaderforest.png" src="_static/csv reader forest.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Node CSV Reader untuk membaca dataset</span><a class="headerlink" href="#csv-reader-rf-kelulusan" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Node <strong>CSV Reader</strong> digunakan untuk membaca file dataset:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>dataset_kelulusan_mahasiswa.csv
+</pre></div>
+</div>
+<p>Langkah konfigurasi:</p>
+<ol class="arabic simple">
+<li><p>Tambahkan node <strong>CSV Reader</strong>.</p></li>
+<li><p>Pilih file <code class="docutils literal notranslate"><span class="pre">dataset_kelulusan_mahasiswa.csv</span></code>.</p></li>
+<li><p>Pastikan delimiter menggunakan koma <code class="docutils literal notranslate"><span class="pre">,</span></code>.</p></li>
+<li><p>Klik <strong>Apply</strong>.</p></li>
+<li><p>Klik <strong>OK</strong>.</p></li>
+<li><p>Jalankan node dengan memilih <strong>Execute</strong>.</p></li>
+</ol>
+<p>Setelah node dijalankan, data dari CSV akan masuk ke dalam workflow KNIME.</p>
+</section>
+<hr class="docutils" />
+<section id="column-filter">
+<h3>Column Filter<a class="headerlink" href="#column-filter" title="Permalink to this heading">#</a></h3>
+<figure class="align-center" id="column-filter-rf-kelulusan">
+<img alt="../img/random-forest-kelulusan/collumfilterforest.png" src="_static/collum filter forest.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Konfigurasi Column Filter</span><a class="headerlink" href="#column-filter-rf-kelulusan" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Node <strong>Column Filter</strong> digunakan untuk membuang kolom yang tidak diperlukan pada proses klasifikasi.</p>
+<p>Pada dataset ini, kolom <code class="docutils literal notranslate"><span class="pre">ID_Mahasiswa</span></code> tidak digunakan sebagai fitur prediksi karena hanya berfungsi sebagai identitas mahasiswa.</p>
+<p>Kolom yang dibuang:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Kolom</p></th>
+<th class="head"><p>Alasan</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ID_Mahasiswa</p></td>
+<td><p>Hanya sebagai identitas, bukan atribut prediksi</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Kolom yang tetap digunakan:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>No</p></th>
+<th class="head"><p>Kolom</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>IPK</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Kehadiran</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Nilai_Tugas</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Nilai_UTS</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Nilai_UAS</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>Organisasi</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>Status_Kelulusan</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="partisi">
+<h3>Partisi<a class="headerlink" href="#partisi" title="Permalink to this heading">#</a></h3>
+<figure class="align-center" id="partisi-rf-kelulusan">
+<img alt="../img/random-forest-kelulusan/partisiforest.png" src="_static/partisi forest.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Konfigurasi Table Partitioner</span><a class="headerlink" href="#partisi-rf-kelulusan" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Node <strong>Table Partitioner</strong> digunakan untuk membagi dataset menjadi data training dan data testing.</p>
+<p>Data dibagi dengan proporsi:</p>
 <ul class="simple">
-<li><p>Memberikan gambaran umum performa model</p></li>
-<li><p>Mudah dipahami karena langsung menunjukkan persentase kebenaran</p></li>
-<li><p>Cocok digunakan jika data relatif seimbang antara kelas 0 dan 1</p></li>
+<li><p><strong>80%</strong> → data training</p></li>
+<li><p><strong>20%</strong> → data testing</p></li>
 </ul>
-<p><strong>Catatan:</strong></p>
-<p>Accuracy bisa menipu jika data tidak seimbang. Misalnya jika data lebih banyak yang tidak churn, model bisa saja terlihat bagus hanya karena sering menebak tidak churn.</p>
-</section>
-<section id="precision">
-<h3>10.2 Precision<a class="headerlink" href="#precision" title="Permalink to this heading">#</a></h3>
-<p><span class="math notranslate nohighlight">\(
-Precision = \frac{TP}{TP + FP}
-\)</span></p>
-<p><span class="math notranslate nohighlight">\(
-= \frac{7806}{7806 + 2057}
-= 0.791
-\)</span></p>
-<p><strong>Penjelasan:</strong></p>
-<p>Precision digunakan untuk mengukur seberapa tepat prediksi model ketika mengatakan suatu pelanggan akan churn.</p>
-<p>Artinya, dari semua data yang diprediksi sebagai churn, berapa banyak yang benar-benar churn.</p>
-<p>Nilai precision sebesar 0.791 berarti sekitar 79.1% dari pelanggan yang diprediksi churn memang benar-benar churn.</p>
-<p><strong>Kegunaan:</strong></p>
+<p>Konfigurasi:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Nilai</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Partitioning Method</p></td>
+<td><p>Relative</p></td>
+</tr>
+<tr class="row-odd"><td><p>Training Data</p></td>
+<td><p>80%</p></td>
+</tr>
+<tr class="row-even"><td><p>Testing Data</p></td>
+<td><p>20%</p></td>
+</tr>
+<tr class="row-odd"><td><p>Sampling</p></td>
+<td><p>Stratified Sampling</p></td>
+</tr>
+<tr class="row-even"><td><p>Stratification Column</p></td>
+<td><p>Status_Kelulusan</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Keterangan:</p>
 <ul class="simple">
-<li><p>Penting ketika kesalahan prediksi churn (false positive) harus diminimalkan</p></li>
-<li><p>Berguna jika ingin menghindari tindakan yang tidak perlu</p></li>
+<li><p>Output atas digunakan sebagai <strong>data training</strong>.</p></li>
+<li><p>Output bawah digunakan sebagai <strong>data testing</strong>.</p></li>
 </ul>
-<p><strong>Contoh kasus:</strong></p>
-<p>Jika perusahaan ingin memberikan promo khusus ke pelanggan yang diprediksi churn, maka precision penting.<br />
-Kalau precision rendah, banyak pelanggan yang sebenarnya tidak churn malah diberi promo (boros biaya).</p>
 </section>
-<section id="recall">
-<h3>10.3 Recall<a class="headerlink" href="#recall" title="Permalink to this heading">#</a></h3>
-<p><span class="math notranslate nohighlight">\(
-Recall = \frac{TP}{TP + FN}
-\)</span></p>
-<p><span class="math notranslate nohighlight">\(
-= \frac{7806}{7806 + 1342}
-= 0.853
-\)</span></p>
-<p><strong>Penjelasan:</strong></p>
-<p>Recall digunakan untuk mengukur kemampuan model dalam menemukan semua pelanggan yang benar-benar churn.</p>
-<p>Artinya, dari seluruh pelanggan yang memang churn, berapa banyak yang berhasil terdeteksi oleh model.</p>
-<p>Nilai recall sebesar 0.853 berarti sekitar 85.3% pelanggan yang churn berhasil dikenali oleh model.</p>
-<p><strong>Kegunaan:</strong></p>
+<hr class="docutils" />
+<section id="training-python-script-random-forest">
+<h3>Training: Python Script Random Forest<a class="headerlink" href="#training-python-script-random-forest" title="Permalink to this heading">#</a></h3>
+<figure class="align-center" id="py-training-rf-kelulusan">
+<img alt="../img/random-forest-kelulusan/TrainingPythonScript.png" src="_static/Training Python Script.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Konfigurasi Python Script untuk Training</span><a class="headerlink" href="#py-training-rf-kelulusan" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Node <strong>Python Script</strong> pertama digunakan untuk melakukan training model Random Forest.</p>
+<p>Node ini menerima data training dari output atas <strong>Table Partitioner</strong>.</p>
+<p>Script yang digunakan:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">knime.scripting.io</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">knio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.ensemble</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">LabelEncoder</span>
+
+<span class="c1"># Ambil data training dari KNIME</span>
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">input_tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+
+<span class="c1"># Pisahkan fitur dan label</span>
+<span class="n">X_train</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Status_Kelulusan&quot;</span><span class="p">])</span>
+<span class="n">y_train</span> <span class="o">=</span> <span class="n">train_df</span><span class="p">[</span><span class="s2">&quot;Status_Kelulusan&quot;</span><span class="p">]</span>
+
+<span class="c1"># Encoding fitur kategorikal</span>
+<span class="n">feature_encoders</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">X_train</span><span class="o">.</span><span class="n">select_dtypes</span><span class="p">(</span><span class="n">include</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;object&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+    <span class="n">X_train</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+    <span class="n">feature_encoders</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span>
+
+<span class="c1"># Encoding target</span>
+<span class="n">target_encoder</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
+<span class="n">y_train_encoded</span> <span class="o">=</span> <span class="n">target_encoder</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Membuat model Random Forest</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">(</span>
+    <span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="n">max_depth</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span>
+<span class="p">)</span>
+
+<span class="c1"># Training model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train_encoded</span><span class="p">)</span>
+
+<span class="c1"># Simpan model dan encoder</span>
+<span class="n">pickle_filename</span> <span class="o">=</span> <span class="s2">&quot;random_forest_kelulusan_model.pkl&quot;</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pickle_filename</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">pickle</span><span class="o">.</span><span class="n">dump</span><span class="p">((</span><span class="n">model</span><span class="p">,</span> <span class="n">feature_encoders</span><span class="p">,</span> <span class="n">target_encoder</span><span class="p">),</span> <span class="n">file</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Model disimpan di: </span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">pickle_filename</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Output data training ke KNIME</span>
+<span class="n">knio</span><span class="o">.</span><span class="n">output_tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">train_df</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Parameter yang digunakan:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Nilai</p></th>
+<th class="head"><p>Keterangan</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">n_estimators</span></code></p></td>
+<td><p>100</p></td>
+<td><p>Jumlah pohon keputusan</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">max_depth</span></code></p></td>
+<td><p>10</p></td>
+<td><p>Kedalaman maksimum pohon</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">random_state</span></code></p></td>
+<td><p>42</p></td>
+<td><p>Seed agar hasil konsisten</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Pada script ini, kolom <code class="docutils literal notranslate"><span class="pre">Organisasi</span></code> diubah menjadi angka menggunakan <code class="docutils literal notranslate"><span class="pre">LabelEncoder</span></code>, sedangkan target <code class="docutils literal notranslate"><span class="pre">Status_Kelulusan</span></code> juga diubah menjadi bentuk numerik agar dapat diproses oleh model.</p>
+</section>
+<hr class="docutils" />
+<section id="testing-python-script-prediksi">
+<h3>Testing: Python Script Prediksi<a class="headerlink" href="#testing-python-script-prediksi" title="Permalink to this heading">#</a></h3>
+<figure class="align-center" id="py-testing-rf-kelulusan">
+<img alt="../img/random-forest-kelulusan/TestingPythonScriptPrediksi.png" src="_static/Testing Python Script Prediksi.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Konfigurasi Python Script untuk Testing</span><a class="headerlink" href="#py-testing-rf-kelulusan" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Node <strong>Python Script</strong> kedua digunakan untuk melakukan prediksi pada data testing.</p>
+<p>Node ini menerima data testing dari output bawah <strong>Table Partitioner</strong>.</p>
+<p>Script yang digunakan:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">knime.scripting.io</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">knio</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
+
+<span class="c1"># Ambil data testing dari KNIME</span>
+<span class="n">test_df</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">input_tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span>
+
+<span class="c1"># Load model dan encoder</span>
+<span class="n">pickle_filename</span> <span class="o">=</span> <span class="s2">&quot;random_forest_kelulusan_model.pkl&quot;</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">pickle_filename</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">model</span><span class="p">,</span> <span class="n">feature_encoders</span><span class="p">,</span> <span class="n">target_encoder</span> <span class="o">=</span> <span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Model berhasil dimuat.&quot;</span><span class="p">)</span>
+
+<span class="c1"># Pisahkan fitur dan label</span>
+<span class="n">X_test</span> <span class="o">=</span> <span class="n">test_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Status_Kelulusan&quot;</span><span class="p">],</span> <span class="n">errors</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+
+<span class="c1"># Encoding fitur kategorikal menggunakan encoder dari data training</span>
+<span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">le</span> <span class="ow">in</span> <span class="n">feature_encoders</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">X_test</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
+
+<span class="c1"># Prediksi</span>
+<span class="n">predictions_encoded</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">probabilities</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict_proba</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Ubah hasil prediksi menjadi label asli</span>
+<span class="n">predictions_label</span> <span class="o">=</span> <span class="n">target_encoder</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">predictions_encoded</span><span class="p">)</span>
+
+<span class="c1"># Tambahkan hasil prediksi ke dataframe</span>
+<span class="n">test_df</span><span class="p">[</span><span class="s2">&quot;Prediction_Status_Kelulusan&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">predictions_label</span>
+<span class="n">test_df</span><span class="p">[</span><span class="s2">&quot;confidence&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">probabilities</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Output ke KNIME</span>
+<span class="n">knio</span><span class="o">.</span><span class="n">output_tables</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">knio</span><span class="o">.</span><span class="n">Table</span><span class="o">.</span><span class="n">from_pandas</span><span class="p">(</span><span class="n">test_df</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Kolom hasil yang ditambahkan:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Kolom</p></th>
+<th class="head"><p>Keterangan</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Prediction_Status_Kelulusan</p></td>
+<td><p>Hasil prediksi model</p></td>
+</tr>
+<tr class="row-odd"><td><p>confidence</p></td>
+<td><p>Tingkat keyakinan model terhadap prediksi</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="scorer">
+<h3>Scorer<a class="headerlink" href="#scorer" title="Permalink to this heading">#</a></h3>
+<figure class="align-center" id="scorer-rf-kelulusan">
+<img alt="../img/random-forest-kelulusan/scorerforest.png" src="_static/scorer forest.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Hasil Scorer</span><a class="headerlink" href="#scorer-rf-kelulusan" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Node <strong>Scorer</strong> digunakan untuk mengevaluasi performa model.</p>
+<p>Node ini membandingkan label asli dengan hasil prediksi.</p>
+<p>Konfigurasi Scorer:</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Kolom</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Actual Column</p></td>
+<td><p>Status_Kelulusan</p></td>
+</tr>
+<tr class="row-odd"><td><p>Predicted Column</p></td>
+<td><p>Prediction_Status_Kelulusan</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Output dari Scorer berupa:</p>
 <ul class="simple">
-<li><p>Penting ketika ingin menangkap sebanyak mungkin kasus churn</p></li>
-<li><p>Berguna jika kehilangan pelanggan lebih berbahaya dibanding salah prediksi</p></li>
+<li><p>Confusion Matrix</p></li>
+<li><p>Accuracy</p></li>
+<li><p>Precision</p></li>
+<li><p>Recall</p></li>
+<li><p>F1-Score</p></li>
 </ul>
-<p><strong>Contoh kasus:</strong></p>
-<p>Jika perusahaan ingin mencegah kehilangan pelanggan, recall lebih penting.<br />
-Kalau recall rendah, banyak pelanggan yang sebenarnya churn tetapi tidak terdeteksi, sehingga tidak ditangani.</p>
+<hr class="docutils" />
+<section id="confusion-matrix">
+<h4>Confusion Matrix<a class="headerlink" href="#confusion-matrix" title="Permalink to this heading">#</a></h4>
+<img alt="../img/random-forest-kelulusan/accuracyforest.png" src="_static/confusion matrik forest.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">Hasil Confusion Matrix</span><a class="headerlink" href="#akurasi-rf-kelulusan" title="Permalink to this image">#</a></p>
+<p>Confusion Matrix digunakan untuk melihat jumlah prediksi benar dan salah.</p>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Aktual / Prediksi</p></th>
+<th class="head text-right"><p>Tepat Waktu</p></th>
+<th class="head text-right"><p>Tidak Tepat Waktu</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Tepat Waktu</p></td>
+<td class="text-right"><p>Benar</p></td>
+<td class="text-right"><p>Salah</p></td>
+</tr>
+<tr class="row-odd"><td><p>Tidak Tepat Waktu</p></td>
+<td class="text-right"><p>Salah</p></td>
+<td class="text-right"><p>Benar</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<hr class="docutils" />
+<section id="akurasi">
+<h4>Akurasi<a class="headerlink" href="#akurasi" title="Permalink to this heading">#</a></h4>
+<figure class="align-center" id="akurasi-rf-kelulusan">
+<img alt="../img/random-forest-kelulusan/accuracyforest.png" src="_static/accuracy forest.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Hasil Akurasi Model</span><a class="headerlink" href="#akurasi-rf-kelulusan" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Akurasi menunjukkan persentase prediksi yang benar dibandingkan dengan seluruh data testing.</p>
+<p>Rumus akurasi:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Accuracy = Jumlah Prediksi Benar / Total Data Testing
+</pre></div>
+</div>
+<p>Contoh interpretasi:</p>
+<p>Apabila akurasi model sebesar 92%, maka model Random Forest berhasil memprediksi status kelulusan mahasiswa dengan tingkat ketepatan sebesar 92%.</p>
 </section>
 </section>
-<section id="kesimpulan-evaluasi">
-<h2>10.4 Kesimpulan Evaluasi<a class="headerlink" href="#kesimpulan-evaluasi" title="Permalink to this heading">#</a></h2>
-<p>Dari ketiga metrik tersebut bisa disimpulkan bahwa:</p>
-<ul class="simple">
-<li><p>Accuracy menunjukkan model sudah cukup baik secara umum</p></li>
-<li><p>Precision menunjukkan prediksi churn cukup akurat</p></li>
-<li><p>Recall menunjukkan model cukup mampu mendeteksi pelanggan churn</p></li>
-</ul>
-<p>Dalam kasus churn, biasanya <strong>recall lebih penting dibanding precision</strong>, karena lebih baik salah sedikit (false alarm) daripada kehilangan pelanggan tanpa diketahui.</p>
-<p>Namun idealnya, model memiliki keseimbangan antara precision dan recall agar tidak terlalu banyak kesalahan di kedua sisi.</p>
 </section>
-<section id="analisis">
-<h2>11. Analisis<a class="headerlink" href="#analisis" title="Permalink to this heading">#</a></h2>
-<p>Model menunjukkan performa yang cukup baik dengan accuracy di atas 80%. Kemampuan model dalam mendeteksi pelanggan churn juga cukup tinggi, terlihat dari nilai recall yang cukup besar.</p>
-<p>Namun masih terdapat kesalahan prediksi, terutama pada false positive dan false negative. Hal ini wajar karena asumsi Naive Bayes yang menganggap fitur tidak saling berhubungan.</p>
-</section>
+<hr class="docutils" />
 <section id="kesimpulan">
-<h2>12. Kesimpulan<a class="headerlink" href="#kesimpulan" title="Permalink to this heading">#</a></h2>
-<p>Dari hasil analisis yang dilakukan, dapat disimpulkan bahwa metode Naive Bayes dapat digunakan untuk memprediksi churn pelanggan dengan hasil yang cukup baik. Model ini sederhana, cepat, dan tidak membutuhkan proses yang terlalu kompleks.</p>
-<p>Meskipun memiliki keterbatasan pada asumsi independensi fitur, hasil yang diperoleh tetap cukup layak digunakan sebagai dasar analisis awal dalam memahami perilaku pelanggan.</p>
+<h2>Kesimpulan<a class="headerlink" href="#kesimpulan" title="Permalink to this heading">#</a></h2>
+<p>Berdasarkan implementasi yang dilakukan, algoritma Random Forest dapat digunakan untuk memprediksi status kelulusan mahasiswa.</p>
+<p>Model menggunakan beberapa atribut, yaitu:</p>
+<ul class="simple">
+<li><p>IPK</p></li>
+<li><p>Kehadiran</p></li>
+<li><p>Nilai_Tugas</p></li>
+<li><p>Nilai_UTS</p></li>
+<li><p>Nilai_UAS</p></li>
+<li><p>Organisasi</p></li>
+</ul>
+<p>Hasil prediksi kemudian dievaluasi menggunakan node Scorer di KNIME. Semakin tinggi nilai akurasi, precision, recall, dan F1-Score, maka semakin baik performa model dalam melakukan klasifikasi status kelulusan mahasiswa.</p>
+<p>Random Forest cocok digunakan pada kasus ini karena mampu menangani data numerik dan kategorikal serta memiliki performa yang stabil untuk tugas klasifikasi.</p>
 </section>
 </section>
 
@@ -817,20 +942,20 @@ Kalau recall rendah, banyak pelanggan yang sebenarnya churn tetapi tidak terdete
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="UTS_Pendat.html"
+       href="Tugas_Decision_Tree.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">UTS Analisa Data Kesuburan Tanah</p>
+        <p class="prev-next-title">Tugas Decision Tree C4.5 (Gain Ratio)</p>
       </div>
     </a>
     <a class="right-next"
-       href="Tugas_Decision_Tree.html"
+       href="Tugas_Regresi_Linier.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Tugas Decision Tree C4.5 (Gain Ratio)</p>
+        <p class="prev-next-title">Tugas Analisa Data Menggunakan Regresi Linier</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -850,40 +975,23 @@ Kalau recall rendah, banyak pelanggan yang sebenarnya churn tetapi tidak terdete
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pendahuluan">1. Pendahuluan</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#konsep-naive-bayes">2. Konsep Naive Bayes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#asumsi-naive-bayes">3. Asumsi Naive Bayes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gaussian-naive-bayes">4. Gaussian Naive Bayes</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#preprocessing-data">5. Preprocessing Data</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#missing-value">5.1 Missing Value</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normalisasi">5.2 Normalisasi</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#contents">Contents</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dataset">Dataset</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#implementasi-pada-knime">Implementasi Pada KNIME</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow">Workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#csv-reader">CSV Reader</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#column-filter">Column Filter</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#partisi">Partisi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#training-python-script-random-forest">Training: Python Script Random Forest</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-python-script-prediksi">Testing: Python Script Prediksi</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scorer">Scorer</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">Confusion Matrix</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#akurasi">Akurasi</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workflow-knime">6. Workflow KNIME</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-node">7. Penjelasan Node</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#a-csv-reader">a. CSV Reader</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#b-missing-value">b. Missing Value</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#c-color-manager">c. Color Manager</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#d-number-to-string">d. Number to String</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#e-normalizer">e. Normalizer</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#f-python-script">f. Python Script</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#penjelasan-kode">Penjelasan Kode</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#g-scorer">g. Scorer</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#hasil-model">8. Hasil Model</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#confusion-matrix">9. Confusion Matrix</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#perhitungan-evaluasi">10. Perhitungan Evaluasi</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#accuracy">10.1 Accuracy</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#precision">10.2 Precision</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#recall">10.3 Recall</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan-evaluasi">10.4 Kesimpulan Evaluasi</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#analisis">11. Analisis</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">12. Kesimpulan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#kesimpulan">Kesimpulan</a></li>
 </ul>
   </nav></div>
 
